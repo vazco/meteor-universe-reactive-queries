@@ -8,7 +8,7 @@ Package.describe({
 
 Package.onUse(function (api) {
     api.versionsFrom(['METEOR@1.0.4']);
-    api.use(['vazco:universe-utilities', 'iron:router@1.0.9 || =0.9.4', 'underscore', 'tracker', 'templating'], 'client');
+    api.use(['vazco:universe-utilities@1.1.6', 'iron:router@1.0.9 || =0.9.4', 'underscore', 'tracker', 'templating'], 'client');
     api.addFiles(['deparam.js'], 'client');
     api.addFiles(['query.js'], 'client');
 
