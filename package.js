@@ -3,7 +3,8 @@
 Package.describe({
     name: 'vazco:universe-reactive-queries',
     version: '1.0.0',
-    summary: 'Reactive url query parameters (works with iron router)'
+    summary: 'Reactive url query parameters (works with iron router)',
+    git: 'https://github.com/vazco/meteor-universe-reactive-queries'
 });
 
 Package.onUse(function (api) {
