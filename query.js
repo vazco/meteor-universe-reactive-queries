@@ -1,5 +1,5 @@
 'use strict';
-var path, pathname, queryObj, query = {};
+var path, pathname, serializations = {}, queryObj, query = {};
 
 var toUrlQuery =  UniUtils.get(window, 'Iron.Url.toQueryString') || function(queryObject){
         return '?'+jQuery.param(queryObject);
@@ -14,17 +14,43 @@ query.ensureKey = function (key) {
     }
     deps[key].depend();
 };
+
+query.setSerializationForQueryKey = function(key, serializeToQueryValue, unserializeFromQueryValue){
+    if(!_.isFunction(serializeToQueryValue) || !_.isFunction(unserializeFromQueryValue)){
+        throw Error('serializeToQueryValue and unserializeFromQueryValue should be functions');
+    }
+
+    serializations[key] = {
+        serialize: serializeToQueryValue,
+        unserialize: unserializeFromQueryValue
+    };
+};
+
 query.equalsQuery = function(key, value){
     return query.getQuery(key) === value;
 };
 
 query.getQuery = function (key, isNonReactive) {
-    if(isNonReactive){
-        return key ? queryObj[key]: queryObj;
+    var value, unserialize;
+    if(key){
+        unserialize = UniUtils.get(serializations, key+'.unserialize');
+    } else {
+        unserialize = function(values){
+            return _.map(values, function(v, k){
+                var fn = UniUtils.get(serializations, k+'.unserialize');
+                return _.isFunction(fn)? fn(v): v;
+            });
+        };
     }
+    if(isNonReactive){
+        value = key ? queryObj[key]: queryObj;
+        return unserialize ? unserialize(value) : value;
+    }
+
     if (key) {
         this.ensureKey(key);
-        return path.queryObject[key];
+        value = path.queryObject[key];
+        return unserialize ? unserialize(value) : value;
     } else {
         if (!this.dep){
             this.dep = new Tracker.Dependency;
@@ -36,16 +62,16 @@ query.getQuery = function (key, isNonReactive) {
 };
 
 query.setQuery = function (key, val) {
+    var serialize = UniUtils.get(serializations, key+'.serialize');
+    val = _.isFunction(serialize)? serialize(val) : val;
     var oldVal = queryObj[key];
     if (String(val) === oldVal || !oldVal && !val){
         return;
     }
 
-
     if (typeof val !== 'undefined' && val !== null && val !== ''){
         queryObj[key] = String(val);
-    }
-    else {
+    } else {
         delete queryObj[key];
     }
     query.isfromLink = false;

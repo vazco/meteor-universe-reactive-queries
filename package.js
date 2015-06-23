@@ -2,7 +2,7 @@
 
 Package.describe({
     name: 'vazco:universe-reactive-queries',
-    version: '0.9.0',
+    version: '1.0.0',
     summary: 'Reactive url query parameters (works with iron router)'
 });
 

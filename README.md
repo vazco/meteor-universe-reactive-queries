@@ -20,6 +20,9 @@ it's reactive method as a default but you can turn off reactivity using isNonRea
 #### UniUtils.url.equalsQuery (key, value)
 checks if value under key is equal passed value
 
+#### UniUtils.url.setSerializationForQueryKey('filterByDateFrom', serializeFn, unserializeFn);
+sets the way to serialize value for given key to url query parameter and how read it back.
+
 ## UI Helpers
 helpers available in the template
 
