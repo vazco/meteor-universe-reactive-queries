@@ -4,7 +4,7 @@ It works with iron router 1.0.X but also should works with 0.9.4
 
 ## Installation
 ```sh
-$ meteor add vazco:universe-reactive-queries
+$ meteor add universe:reactive-queries
 ```
 
 ## API
