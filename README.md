@@ -1,4 +1,15 @@
-# universe reactive queries
+<h1 align="center">
+    <a href="https://github.com/vazco">vazco</a>/Universe Reactive Queries
+</h1>
+
+&nbsp;
+
+<h3 align="center">
+  -- Abandonware. This package is deprecated! --
+</h3>
+
+&nbsp;
+
 simple package to add and take query parameters from urls with Meteor. 
 It works with iron router 1.0.X but also should works with 0.9.4
 
@@ -32,4 +43,8 @@ gets the value of a key
 #### {{ equalsQuery key }}
 checks if value under key is equal passed value
 
-### License MIT
+## License
+
+<img src="https://vazco.eu/banner.png" align="right">
+
+**Like every package maintained by [Vazco](https://vazco.eu/), Universe Reactive Queries is [MIT licensed](https://github.com/vazco/uniforms/blob/master/LICENSE).**
